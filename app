@@ -5,7 +5,7 @@ var
 	mongoose = require('mongoose'),
 	MONGO_URL = 'mongodb://localhost/grading',
 	db = mongoose.connection,
-	classes = require('./lib/Class.js');
+	classes = require('./lib/Class.js').Class;
 
 mongoose.connect(MONGO_URL);
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -14,7 +14,15 @@ db.once('open', function callback () {
 });
 
 app.get('/', function(req, res) {
-	res.send('welcome');
+	classes.getClasses(
+		{
+			success : function(body) {
+				res.send(body);
+			},
+			fail : function(err) {
+				console.log(err);
+			}
+		});
 });
 
 app.listen(PORT, function() {
