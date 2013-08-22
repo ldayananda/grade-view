@@ -18,6 +18,7 @@ var
 	};
 
 app.use(express.bodyParser());
+app.use(express.static(__dirname + '/public'));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
@@ -32,6 +33,9 @@ db.once('open', function callback () {
 });
 
 app.get('/', function(req, res) {
+});
+
+app.get('/classes', function(req, res) {
 	classes.getClasses(cb(res));
 });
 
@@ -43,6 +47,11 @@ app.get('/:id', function(req, res) {
 app.post('/grading', function(req, res) {
 	var record = req.body;
 	classes.add(record, cb(res));
+});
+
+app.post('calculate', function(req, res) {
+	var record = req.body;
+	classes.calc(record, cb(res));
 });
 
 app.listen(PORT, function() {
