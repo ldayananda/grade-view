@@ -49,7 +49,7 @@ app.post('/grading', function(req, res) {
 	classes.add(record, cb(res));
 });
 
-app.post('calculate', function(req, res) {
+app.post('/calculate', function(req, res) {
 	var record = req.body;
 	classes.calc(record, cb(res));
 });

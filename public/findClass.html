@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Courses </title>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script type="javascript">
+	function find(){
+		var courseName = $("[name$=cname]").val(),
+			url = "http://localhost:2000/" + courseName;	
+
+		$.ajax({
+			type : "GET",
+			url : url,
+			data : { 'id' : courseName },
+			success : function(data) {
+				console.log("got class!");
+			},
+			fail : function(data) {
+				console.log(data);
+			});
+	}
+</script>
+</head>
+
+<body>
+	<div class="container">
+	<div class="page-header">
+		<h1 class="text-center">
+		Class Grades Calculator
+		</h1>
+	</div>
+	</br>
+	<div class="navbar navbar-default" role="navigation">
+	  <div class="container-fluid">
+	    <url class="nav navbar-nav">
+	      <li class="active"><a href="#">ADD</a></li>
+	      <li class="active"><a href="#">FIND</a></li>
+	      <li class="active"><a href="#">CALCULATE</a></li> 
+	  </div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+		<div class="input-group">
+			Course Name:
+			<input name="cname" type="text"></input>
+		</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+	<div class="col-lg-12">
+		<div class="btn-group">
+			<button onclick="find()" class="btn btn-default btn-large" type="button">
+				Submit
+			</button>
+		</div>
+	</div>
+	</div>
+</html>
